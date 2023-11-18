@@ -1,0 +1,21 @@
+CREATE DATABASE CursoPy;
+
+USE CursoPy;
+
+CREATE TABLE profesores (
+    id_profesor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellidos VARCHAR(50),
+    edad INT,
+    ciudad VARCHAR(50)
+);
+
+CREATE TABLE alumnos (
+    id_alumno INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellidos VARCHAR(50),
+    edad INT,
+    ciudad VARCHAR(50),
+    id_profesor INT,
+    FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor)
+);
