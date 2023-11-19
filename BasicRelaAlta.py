@@ -28,7 +28,8 @@ def insertar_alumno(nombre, apellidos, edad, ciudad, id_profesor):
     try:
         conn = conectar()
         cursor = conn.cursor()
-        sql = "INSERT INTO alumnos (nombre, apellidos, edad, ciudad, id_profesor) VALUES (%s, %s, %s, %s, %s)" # El simbolo % es un marcador de posición se usa independientemente del tipo de datos
+        sql = "INSERT INTO alumnos (nombre, apellidos, edad, ciudad, id_profesor) VALUES (%s, %s, %s, %s, %s)"
+        # El simbolo % es un marcador de posición se usa independientemente del tipo de datos
         valores = (nombre, apellidos, edad, ciudad, id_profesor)
         cursor.execute(sql, valores)
         conn.commit()
