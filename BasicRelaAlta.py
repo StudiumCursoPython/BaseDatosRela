@@ -41,7 +41,7 @@ def insertar_alumno(nombre, apellidos, edad, ciudad, id_profesor):
             conn.close()
 
 # Inserta en la tabla profesor
-id_profesor = insertar_profesor("José Antonio", "Calvo López", 53, "Sevilla")
+id_profesor = insertar_profesor("José Manuel", "Marín López", 53, "Sevilla")
 
 # Se inserta a 11 alumnos con bucle for
 for i in range(1, 12):

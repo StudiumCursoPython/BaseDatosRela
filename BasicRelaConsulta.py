@@ -18,7 +18,18 @@ try:
 
     # Para ver los resultados
     for nombre in nombres_alumnos:
+        # Coge la primera posicion es más correcta
         print(nombre[0])
+        # Ver la diferencia
+        print(nombre)
+    cursor.execute("SELECT * FROM profesores")
+
+    # Recuperación de los datos
+    datos_profesores = cursor.fetchall()
+
+    # Para ver los resultados
+    for profesor in datos_profesores:
+        print(profesor)  # Muestra todos los datos de cada profesor
 
 except mysql.connector.Error as e:
     print(f"Error al conectar a MySQL: {e}")

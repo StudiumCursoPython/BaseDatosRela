@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 import mysql.connector
-import os, sys
-from tkinter import *
-from tkinter.ttk import *
 
 def conectar():
     return mysql.connector.connect(
@@ -21,9 +18,10 @@ def insertar_profesor(nombre, apellidos, edad, ciudad):
         valores = (nombre, apellidos, edad, ciudad)
         cursor.execute(sql, valores)
         conn.commit()
-        return cursor.lastrowid # Devuelve el valor generado por una columna auto_increment
+        return cursor.lastrowid
     except mysql.connector.Error as e:
-        print(f"Error: {e}")
+        print(f"Error al insertar profesor: {e}")
+        return None
     finally:
         if conn.is_connected():
             cursor.close()
@@ -37,34 +35,33 @@ def insertar_alumno(nombre, apellidos, edad, ciudad, id_profesor):
         valores = (nombre, apellidos, edad, ciudad, id_profesor)
         cursor.execute(sql, valores)
         conn.commit()
-        return True  # Inserción exitosa
+        return True
     except mysql.connector.Error as e:
-        print(f"Error: {e}")
-        return False  # Inserción fallida
+        print(f"Error al insertar alumno: {e}")
+        return False
     finally:
         if conn.is_connected():
             cursor.close()
             conn.close()
 
-
 def interfaz_insertar_profesor():
     nombre_profesor = entrada_nombre_profesor.get()
     apellidos_profesor = entrada_apellidos_profesor.get()
-    edad_profesor = entrada_edad_profesor.get()
+    edad_profesor = int(entrada_edad_profesor.get())  
     ciudad_profesor = entrada_ciudad_profesor.get()
     id_profesor = insertar_profesor(nombre_profesor, apellidos_profesor, edad_profesor, ciudad_profesor)
-    if id_profesor:
+    
+    if id_profesor is not None:
         messagebox.showinfo("Éxito", "Profesor insertado con éxito")
     else:
         messagebox.showerror("Error", "No se pudo insertar el profesor")
 
-
 def interfaz_insertar_alumno():
     nombre_alumno = entrada_nombre_alumno.get()
     apellidos_alumno = entrada_apellidos_alumno.get()
-    edad_alumno = entrada_edad_alumno.get()
+    edad_alumno = int(entrada_edad_alumno.get())  
     ciudad_alumno = entrada_ciudad_alumno.get()
-    id_profesor = entrada_id_profesor.get()
+    id_profesor = int(entrada_id_profesor.get())  
 
     exito = insertar_alumno(nombre_alumno, apellidos_alumno, edad_alumno, ciudad_alumno, id_profesor)
     
@@ -73,26 +70,11 @@ def interfaz_insertar_alumno():
     else:
         messagebox.showerror("Error", "No se pudo insertar el alumno")
 
-
-
 # Crear la ventana principal
 aplicacion = tk.Tk()
 aplicacion.title("Altas de Profesores y Alumnos")
 aplicacion.geometry("240x270")
-# Método para el centrado aproximado de la ventana
-aplicacion.eval('tk::PlaceWindow . center')
-aplicacion.resizable(False,False)
-
-# Obtener la ruta de acceso a los recursos incluidos en el archivo para los archivos empaquetados
-ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-
-# Otra forma de obtener los recursos 
-# ruta_recursos = getattr(sys, 'os.path.dirname(os.path.abspath(__file__))', os.path.dirname(os.path.abspath(__file__)))
-
-# Cargar las imágenes
-icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
-
-aplicacion.iconphoto(True, icono)
+aplicacion.resizable(False, False)
 
 # Crear y colocar los campos y botones para insertar profesores
 tk.Label(aplicacion, text="Nombre Profesor:").grid(row=0, column=0)
