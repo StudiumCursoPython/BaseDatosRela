@@ -1,6 +1,9 @@
-import tkinter as tk
 from tkinter import messagebox
+from tkinter import *
+import tkinter as tk
 import mysql.connector
+import os
+import sys
 
 def conectar():
     return mysql.connector.connect(
@@ -72,9 +75,15 @@ def interfaz_insertar_alumno():
 
 # Crear la ventana principal
 aplicacion = tk.Tk()
-aplicacion.title("Altas de Profesores y Alumnos")
+aplicacion.title("Altas P y A")
 aplicacion.geometry("240x270")
 aplicacion.resizable(False, False)
+
+# Obtener la ruta de acceso a los recursos incluidos en el archivo
+ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+# Crear la ventana de la aplicación
+icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
 
 # Crear y colocar los campos y botones para insertar profesores
 tk.Label(aplicacion, text="Nombre Profesor:").grid(row=0, column=0)
@@ -119,4 +128,5 @@ entrada_id_profesor.grid(row=9, column=1)
 tk.Button(aplicacion, text="Insertar Alumno", command=interfaz_insertar_alumno).grid(row=10, column=0, columnspan=2)
 
 # Mostrar la ventana
+aplicacion.iconphoto(True, icono)
 aplicacion.mainloop()
