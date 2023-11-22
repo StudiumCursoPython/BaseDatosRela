@@ -17,5 +17,5 @@ CREATE TABLE alumnos (
     edad INT,
     ciudad VARCHAR(50),
     id_profesor INT,
-    FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor)
+    FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor) ON DELETE CASCADE
 );

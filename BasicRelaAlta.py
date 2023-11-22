@@ -12,6 +12,7 @@ def insertar_profesor(nombre, apellidos, edad, ciudad):
     try:
         conn = conectar()
         cursor = conn.cursor()
+         # El simbolo %s es un marcador de posición se usa independientemente del tipo de datos
         sql = "INSERT INTO profesores (nombre, apellidos, edad, ciudad) VALUES (%s, %s, %s, %s)"
         valores = (nombre, apellidos, edad, ciudad)
         cursor.execute(sql, valores)
