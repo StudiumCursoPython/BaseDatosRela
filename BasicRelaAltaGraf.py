@@ -75,8 +75,8 @@ def interfaz_insertar_alumno():
 
 # Crear la ventana principal
 aplicacion = tk.Tk()
-aplicacion.title("Altas P y A")
-aplicacion.geometry("240x270")
+aplicacion.title("Altas de P y A")
+aplicacion.geometry("350x270")
 aplicacion.resizable(False, False)
 
 # Obtener la ruta de acceso a los recursos incluidos en el archivo
@@ -126,6 +126,8 @@ entrada_id_profesor = tk.Entry(aplicacion)
 entrada_id_profesor.grid(row=9, column=1)
 
 tk.Button(aplicacion, text="Insertar Alumno", command=interfaz_insertar_alumno).grid(row=10, column=0, columnspan=2)
+
+Label(aplicacion, text="*Todos los campos son requeridos").grid(row=11, column=0)
 
 # Mostrar la ventana
 aplicacion.iconphoto(True, icono)

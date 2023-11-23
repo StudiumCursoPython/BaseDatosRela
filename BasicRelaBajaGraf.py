@@ -1,6 +1,9 @@
-import tkinter as tk
 from tkinter import simpledialog
+from tkinter import *
+import tkinter as tk
 import mysql.connector
+import os
+import sys
 
 def conectar():
     return mysql.connector.connect(
@@ -29,7 +32,14 @@ def eliminar_alumno():
         conexion.close()
 
 root = tk.Tk()
-root.title("Gestión de CursoPy")
+root.title("Bajas de P. y A.")
+root.geometry("300x70")
+
+# Obtener la ruta de acceso a los recursos incluidos en el archivo
+ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+# Crear la ventana de la aplicación
+icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
 
 boton_profesor = tk.Button(root, text="Eliminar Profesor", command=eliminar_profesor)
 boton_profesor.pack()
@@ -37,4 +47,6 @@ boton_profesor.pack()
 boton_alumno = tk.Button(root, text="Eliminar Alumno", command=eliminar_alumno)
 boton_alumno.pack()
 
+root.iconphoto(True,icono)
 root.mainloop()
+

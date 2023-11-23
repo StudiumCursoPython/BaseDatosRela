@@ -1,6 +1,9 @@
-import mysql.connector
-import tkinter as tk
 from tkinter import messagebox
+from tkinter import *
+import tkinter as tk
+import mysql.connector
+import os
+import sys
 
 def conectar():
     return mysql.connector.connect(
@@ -22,7 +25,7 @@ def consultar_alumnos():
             area_texto.insert(tk.END, str(alumno) + "\n")
     
     except mysql.connector.Error as e:
-        messagebox.showerror("Error", f"Error al conectar a MySQL: {e}")
+        messagebox.showerror("Error", f"Error al conectar a MySQL: {str(e)}")
     
     finally:
         if conn.is_connected():
@@ -41,7 +44,7 @@ def consultar_profesores():
             area_texto.insert(tk.END, str(profesor) + "\n")
     
     except mysql.connector.Error as e:
-        messagebox.showerror("Error", f"Error al conectar a MySQL: {e}")
+        messagebox.showerror("Error", f"Error al conectar a MySQL: {str(e)}")
 
     finally:
         if conn.is_connected():
@@ -50,7 +53,13 @@ def consultar_profesores():
 
 root = tk.Tk()
 root.title("Consulta BBDD")
+root.geometry("420x240")
 
+# Obtener la ruta de acceso a los recursos incluidos en el archivo
+ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+# Crear la ventana de la aplicación
+icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
 # Creación de un marco para los botones
 frame_botones = tk.Frame(root)
 frame_botones.pack(pady=10)
@@ -64,7 +73,8 @@ boton_profesor = tk.Button(frame_botones, text="Consulta de profesores", command
 boton_profesor.pack(side=tk.LEFT, padx=10)
 
 # Área de texto debajo del marco de los botones
-area_texto = tk.Text(root, height=10, width=50)
+area_texto = tk.Text(root, height=15, width=50)
 area_texto.pack(pady=10)
 
+root.iconphoto(True,icono)
 root.mainloop()
