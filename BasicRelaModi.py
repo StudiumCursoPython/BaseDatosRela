@@ -19,6 +19,7 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
         cursor = conn.cursor()
 
         # Consulta SQL para modificar un alumno
+        # Tres comillas triples, permiten que la consulta se escriba en varias líneas para mejorar la legibilidad
         sql = """
         UPDATE alumnos
         SET nombre = %s, apellidos = %s, edad = %s, ciudad = %s

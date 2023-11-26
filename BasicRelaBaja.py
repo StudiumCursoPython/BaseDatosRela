@@ -24,9 +24,10 @@ def eliminar_alumno(nombre):
 
         # Ejecutar la consulta
         cursor.execute(sql, valores)
-        conn.commit()
 
-        print(f"Alumno con ID {nombre} eliminado correctamente.")
+        print(f"Alumno con nombre {nombre} eliminado correctamente.")
+
+        conn.commit()
 
     except mysql.connector.Error as e:
         print(f"Error al eliminar el alumno: {e}")
@@ -41,15 +42,23 @@ def eliminar_profesor(id_profesor):
         conn = conectar()
         cursor = conn.cursor()
         
-        # Consulta SQL para eliminar un alumno
-        sql = "DELETE FROM profesores WHERE id_profesor = %s"
-        valores = (id_profesor,)
+        # Consulta SQL para eliminar los alumnos asociados a este profesor
+        sql_eliminar_alumnos = "DELETE FROM alumnos WHERE id_profesor = %s"
+        valores_alumnos = (id_profesor,)
 
-        # Ejecutar la consulta
-        cursor.execute(sql, valores)
-        conn.commit()
+        # Ejecutar la consulta para eliminar los alumnos
+        cursor.execute(sql_eliminar_alumnos, valores_alumnos)
+        
+        # Consulta SQL para eliminar al profesor
+        sql_eliminar_profesor = "DELETE FROM profesores WHERE id_profesor = %s"
+        valores_profesor = (id_profesor,)
 
-        print(f"Alumno con ID {id_profesor} eliminado correctamente.")
+        # Ejecutar la consulta para eliminar al profesor
+        cursor.execute(sql_eliminar_profesor, valores_profesor)
+
+        print(f"Profesor con ID {id_profesor} eliminado correctamente.")
+
+        conn.commit()  
 
     except mysql.connector.Error as e:
         print(f"Error al eliminar el profesor: {e}")
@@ -59,7 +68,9 @@ def eliminar_profesor(id_profesor):
             cursor.close()
             conn.close()
 
-# Eliminar el alumno con nombre ...
-eliminar_alumno("Alumno2")
+# Ejemplo para eliminar un profesor por su ID, cambiar la ID según la BBDD
+eliminar_profesor("3")
 
-eliminar_profesor("2")
+# Ejemplo para eliminar a un alumno por su nombre, cambiar nombre según la BBDD
+eliminar_alumno("Alumno6")
+
