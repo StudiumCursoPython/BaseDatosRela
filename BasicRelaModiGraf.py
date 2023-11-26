@@ -3,12 +3,18 @@ import os
 import sys
 import mysql.connector
 
+HOST = "178.211.133.56"
+USER = "ofluqcym_cursoFor"
+PASSWORD = "Studium2020;"
+DATABASE = "ofluqcym_CursoPy"
+
+
 def conectar():
     return mysql.connector.connect(
-        host="178.211.133.56",
-        user="ofluqcym_cursoFor",
-        password="Studium2020;",
-        database="ofluqcym_CursoPy"
+        host = HOST,
+        user = USER,
+        password = PASSWORD,
+        database = DATABASE
     )
 
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):

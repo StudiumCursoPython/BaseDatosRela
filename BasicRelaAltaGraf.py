@@ -5,12 +5,18 @@ import mysql.connector
 import os
 import sys
 
+HOST = "178.211.133.56"
+USER = "ofluqcym_cursoFor"
+PASSWORD = "Studium2020;"
+DATABASE = "ofluqcym_CursoPy"
+
+
 def conectar():
     return mysql.connector.connect(
-        host="178.211.133.56",
-        user="ofluqcym_cursoFor",
-        password="Studium2020;",
-        database="ofluqcym_CursoPy"
+        host = HOST,
+        user = USER,
+        password = PASSWORD,
+        database = DATABASE
     )
 
 def insertar_profesor(nombre, apellidos, edad, ciudad):
