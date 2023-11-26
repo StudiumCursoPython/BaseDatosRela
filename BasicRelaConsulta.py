@@ -1,12 +1,17 @@
 import mysql.connector
 
+HOST = "localhost"
+USER = "root"
+PASSWORD = "Studium2020;"
+DATABASE = "CursoPy"
+
 # Conexión a la base de datos MySQL
 try:
     conn = mysql.connector.connect(
-        host="localhost",  
-        user="root", 
-        password="Studium2020;",
-        database="CursoPy"
+        host = HOST,  
+        user = USER, 
+        password = PASSWORD,
+        database = DATABASE
     )
     cursor = conn.cursor()
 

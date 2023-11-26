@@ -1,11 +1,16 @@
 import mysql.connector
 
+HOST = "localhost"
+USER = "root"
+PASSWORD = "Studium2020;"
+DATABASE = "CursoPy"
+
 def conectar():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Studium2020;",
-        database="CursoPy"
+        host = HOST,
+        user = USER,
+        password = PASSWORD,
+        database = DATABASE
     )
 
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
@@ -34,6 +39,10 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
         if conn.is_connected():
             cursor.close()
             conn.close()
+
+# Modificar Profesor
+
+
 
 # El Alumno con id_alumno14 va a modificar los datos que se pasan por parámentros al método
 modificar_alumno(14, "Antonio", "García", 39, "Palmete")
