@@ -36,5 +36,30 @@ def eliminar_alumno(nombre):
             cursor.close()
             conn.close()
 
+def eliminar_profesor(id_profesor):
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+        
+        # Consulta SQL para eliminar un alumno
+        sql = "DELETE FROM profesores WHERE id_profesor = %s"
+        valores = (id_profesor,)
+
+        # Ejecutar la consulta
+        cursor.execute(sql, valores)
+        conn.commit()
+
+        print(f"Alumno con ID {id_profesor} eliminado correctamente.")
+
+    except mysql.connector.Error as e:
+        print(f"Error al eliminar el profesor: {e}")
+
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+
 # Eliminar el alumno con nombre ...
 eliminar_alumno("Alumno2")
+
+eliminar_profesor("2")
