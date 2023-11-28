@@ -43,7 +43,37 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
 
 # Modificar Profesor
 
+def modificar_profesor(id_profesor, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+
+        # Consulta SQL para modificar al profesor
+        sql = """
+        UPDATE profesores
+        SET nombre = %s, apellidos = %s, edad = %s, ciudad = %s
+        WHERE id_profesor = %s
+        """
+        valores = (nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad, id_profesor)
+
+        # Ejecutar la consulta
+        cursor.execute(sql, valores)
+        conn.commit()
+
+        print("Profesor con ID " + str(id_profesor) + " modificado correctamente.") #Concatenación anteriror a f-strings
+
+    except mysql.connector.Error as e:
+        print(f"Error al modificar al profesor: {e}" + e)
+
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
 
 
-# El Alumno con id_alumno14 va a modificar los datos que se pasan por parámentros al método
-modificar_alumno(14, "Antonio", "García", 39, "Palmete")
+
+# El Alumno con id_alumno34 va a modificar los datos que se pasan por parámentros al método, asegurarse que existe la id
+# Si no existen las id respectivas lo dará por cambiado.
+modificar_alumno(34, "Antonio", "García", 39, "Palmete")
+
+modificar_profesor(5, "José Andrés", "Marín Huertas", 53, "Cadiz")
