@@ -54,35 +54,59 @@ def insertar_alumno(nombre, apellidos, edad, ciudad, id_profesor):
             conn.close()
 
 def interfaz_insertar_profesor():
-    nombre_profesor = entrada_nombre_profesor.get()
-    apellidos_profesor = entrada_apellidos_profesor.get()
-    edad_profesor = int(entrada_edad_profesor.get())  
-    ciudad_profesor = entrada_ciudad_profesor.get()
-    id_profesor = insertar_profesor(nombre_profesor, apellidos_profesor, edad_profesor, ciudad_profesor)
-    
-    if id_profesor is not None:
-        messagebox.showinfo("Éxito", "Profesor insertado con éxito")
-    else:
-        messagebox.showerror("Error", "No se pudo insertar el profesor")
+    try:
+        nombre_profesor = entrada_nombre_profesor.get()
+        apellidos_profesor = entrada_apellidos_profesor.get()
+        edad_profesor = int(entrada_edad_profesor.get())
+        ciudad_profesor = entrada_ciudad_profesor.get()
+        id_profesor = insertar_profesor(nombre_profesor, apellidos_profesor, edad_profesor, ciudad_profesor)
+        
+        if id_profesor is not None:
+            messagebox.showinfo("Éxito", "Profesor insertado con éxito")
+        else:
+            messagebox.showerror("Error", "No se pudo insertar el profesor")
+    except ValueError:
+        messagebox.showerror("Error", "La edad debe ser un número")
+    finally:
+        borrado_campos()
+
 
 def interfaz_insertar_alumno():
-    nombre_alumno = entrada_nombre_alumno.get()
-    apellidos_alumno = entrada_apellidos_alumno.get()
-    edad_alumno = int(entrada_edad_alumno.get())  
-    ciudad_alumno = entrada_ciudad_alumno.get()
-    id_profesor = int(entrada_id_profesor.get())  
+    try:
+        nombre_alumno = entrada_nombre_alumno.get()
+        apellidos_alumno = entrada_apellidos_alumno.get()
+        edad_alumno = int(entrada_edad_alumno.get())  
+        ciudad_alumno = entrada_ciudad_alumno.get()
+        id_profesor = int(entrada_id_profesor.get())  
 
-    exito = insertar_alumno(nombre_alumno, apellidos_alumno, edad_alumno, ciudad_alumno, id_profesor)
-    
-    if exito:
-        messagebox.showinfo("Éxito", "Alumno insertado con éxito")
-    else:
-        messagebox.showerror("Error", "No se pudo insertar el alumno")
+        exito = insertar_alumno(nombre_alumno, apellidos_alumno, edad_alumno, ciudad_alumno, id_profesor)
+        
+        if exito:
+            messagebox.showinfo("Éxito", "Alumno insertado con éxito")
+        else:
+            messagebox.showerror("Error", "No se pudo insertar el alumno")
+    except ValueError:
+        messagebox.showerror("Error", "La edad debe ser un número")
+    finally:
+        borrado_campos()
+
+
+def borrado_campos():
+    entrada_nombre_profesor.delete(0, 'end')
+    entrada_apellidos_profesor.delete(0, 'end')
+    entrada_edad_profesor.delete(0, 'end')
+    entrada_ciudad_profesor.delete(0, 'end')
+    # De alumnos
+    entrada_nombre_alumno.delete(0, 'end')
+    entrada_apellidos_alumno.delete(0, 'end')
+    entrada_edad_alumno.delete(0, 'end')
+    entrada_ciudad_alumno.delete(0, 'end')
+    entrada_id_profesor.delete(0, 'end')
 
 # Crear la ventana principal
 aplicacion = tk.Tk()
 aplicacion.title("Altas de P y A")
-aplicacion.geometry("350x270")
+aplicacion.geometry("350x300")
 #centrado aproximado de la ventana
 aplicacion.eval('tk::PlaceWindow . center')
 aplicacion.resizable(False, False)
@@ -135,8 +159,9 @@ entrada_id_profesor = tk.Entry(aplicacion)
 entrada_id_profesor.grid(row=9, column=1)
 
 tk.Button(aplicacion, text="Insertar Alumno", command=interfaz_insertar_alumno).grid(row=10, column=0, columnspan=2)
-
 Label(aplicacion, text="*Todos los campos son requeridos").grid(row=11, column=0)
+tk.Button(aplicacion, text = "Borrar campos", command=borrado_campos).grid(row=12, column=0, columnspan=2)
+
 
 # Mostrar la ventana
 aplicacion.iconphoto(True, icono)
