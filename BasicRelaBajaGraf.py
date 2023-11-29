@@ -1,4 +1,4 @@
-from tkinter import simpledialog
+from tkinter import simpledialog, messagebox
 from tkinter import *
 import tkinter as tk
 import mysql.connector
@@ -24,18 +24,34 @@ def eliminar_profesor():
     if id_profesor:
         conexion = conectar()
         cursor = conexion.cursor()
-        cursor.execute("DELETE FROM profesores WHERE id_profesor = %s", (id_profesor,))
-        conexion.commit()
-        conexion.close()
+        try:
+            cursor.execute("DELETE FROM profesores WHERE id_profesor = %s", (id_profesor,))
+            if cursor.rowcount > 0:
+                conexion.commit()
+                messagebox.showinfo("Éxito", "Profesor eliminado correctamente")
+            else:
+                messagebox.showerror("Error", "No se encontró el profesor con el ID especificado")
+        except mysql.connector.Error as err:
+            messagebox.showerror("Error", f"Error al eliminar profesor: {err}")
+        finally:
+            conexion.close()
 
 def eliminar_alumno():
     id_alumno = simpledialog.askstring("Eliminar Alumno", "Ingrese el ID del alumno:")
     if id_alumno:
         conexion = conectar()
         cursor = conexion.cursor()
-        cursor.execute("DELETE FROM alumnos WHERE id_alumno = %s", (id_alumno,))
-        conexion.commit()
-        conexion.close()
+        try:
+            cursor.execute("DELETE FROM alumnos WHERE id_alumno = %s", (id_alumno,))
+            if cursor.rowcount > 0:
+                conexion.commit()
+                messagebox.showinfo("Éxito", "Alumno eliminado correctamente")
+            else:
+                messagebox.showerror("Error", "No se encontró el alumno con el ID especificado")
+        except mysql.connector.Error as err:
+            messagebox.showerror("Error", f"Error al eliminar alumno: {err}")
+        finally:
+            conexion.close()
 
 root = tk.Tk()
 root.title("Bajas de P. y A.")

@@ -22,7 +22,7 @@ def insertar_profesor(nombre, apellidos, edad, ciudad):
         valores = (nombre, apellidos, edad, ciudad)
         cursor.execute(sql, valores)
         conn.commit()
-        # En este caso no se usa, se muestra para que se vea como se puede recupar una ID autoincremental.
+        # En este caso no se usa, se muestra para que se vea como se puede recupar una ID autoincrement.
         return cursor.lastrowid
     except mysql.connector.Error as e:
         print(f"Error: {e}")
