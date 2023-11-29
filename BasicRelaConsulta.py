@@ -27,6 +27,7 @@ try:
         print(nombre[0])
         # Ver la diferencia
         print(nombre)
+        
     cursor.execute("SELECT * FROM profesores")
 
     # Recuperación de los datos
