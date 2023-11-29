@@ -50,5 +50,5 @@ def insertar_alumno(nombre, apellidos, edad, ciudad, id_profesor):
 id_profesor = insertar_profesor("José Manuel", "Marín López", 53, "Sevilla")
 
 # Se inserta a 11 alumnos con bucle for
-for i in range(1, 12):
+for i in range(1, 3):
     insertar_alumno(f"Alumno{i}", "Apellido", 20 + i, "Ciudad", id_profesor)
