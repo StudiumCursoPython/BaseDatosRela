@@ -83,7 +83,10 @@ def interfaz_insertar_alumno():
 aplicacion = tk.Tk()
 aplicacion.title("Altas de P y A")
 aplicacion.geometry("350x270")
+#centrado aproximado de la ventana
+aplicacion.eval('tk::PlaceWindow . center')
 aplicacion.resizable(False, False)
+
 
 # Obtener la ruta de acceso a los recursos incluidos en el archivo
 ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))

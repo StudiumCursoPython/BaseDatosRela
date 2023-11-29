@@ -59,6 +59,8 @@ def consultar_profesores():
 
 root = tk.Tk()
 root.title("Consulta BBDD")
+#centrado aproximado de la ventana
+root.eval('tk::PlaceWindow . center')
 root.geometry("420x240")
 
 # Obtener la ruta de acceso a los recursos incluidos en el archivo

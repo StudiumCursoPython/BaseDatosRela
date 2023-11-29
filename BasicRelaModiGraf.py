@@ -92,6 +92,8 @@ def interfaz_modificar_alumno():
 aplicacion = Tk()
 aplicacion.title("Modificaciones P. y A.")
 aplicacion.geometry("350x300")
+#centrado aproximado de la ventana
+aplicacion.eval('tk::PlaceWindow . center')
 aplicacion.resizable(False, False)
 
 ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
