@@ -11,18 +11,22 @@ DATABASE = "ofluqcym_CursoPy"
 
 def conectar():
     return mysql.connector.connect(
-        host = HOST,
-        user = USER,
-        password = PASSWORD,
-        database = DATABASE
+        host=HOST,
+        user=USER,
+        password=PASSWORD,
+        database=DATABASE
     )
 
+
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
+    if not all([id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad]):
+        messagebox.showerror("Error", "Todos los campos son requeridos")
+        return False
+
     try:
         conn = conectar()
         cursor = conn.cursor()
 
-        # Tres comillas triples, permiten que la consulta se escriba en varias líneas para mejorar la legibilidad
         sql = """
         UPDATE alumnos
         SET nombre = %s, apellidos = %s, edad = %s, ciudad = %s
@@ -33,22 +37,31 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
         cursor.execute(sql, valores)
         conn.commit()
 
+        if cursor.rowcount == 0:
+            return False
+
         return True
     except mysql.connector.Error as e:
-        print(f"Error al modificar el alumno: {str(e)}")
+        messagebox.showerror("Error", f"Error al modificar el alumno: {str(e)}")
         return False
     finally:
         if conn.is_connected():
             cursor.close()
             conn.close()
 
+
 def modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad):
+    if not all([id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad]):
+        messagebox.showerror("Error", "Todos los campos son requeridos")
+        return False
+
     try:
         conn = conectar()
         cursor = conn.cursor()
 
         sql = """
-        UPDATE profesores SET nombre = %s, apellidos = %s, edad = %s, ciudad = %s
+        UPDATE profesores
+        SET nombre = %s, apellidos = %s, edad = %s, ciudad = %s
         WHERE id_profesor = %s
         """
         valores = (nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad, id_profesor)
@@ -56,14 +69,18 @@ def modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nu
         cursor.execute(sql, valores)
         conn.commit()
 
+        if cursor.rowcount == 0:
+            return False
+
         return True
     except mysql.connector.Error as e:
-        print(f"Error al modificar al profesor: {str(e)}")
+        messagebox.showerror("Error", f"Error al modificar el profesor: {str(e)}")
         return False
     finally:
         if conn.is_connected():
             cursor.close()
             conn.close()
+
 
 def interfaz_modificar_profesor():
     id_profesor = entrada_id_profesor.get()
@@ -77,6 +94,7 @@ def interfaz_modificar_profesor():
     else:
         messagebox.showerror("Error", "No se pudo modificar el profesor")
 
+
 def interfaz_modificar_alumno():
     id_alumno = entrada_id_alumno.get()
     nuevo_nombre = entrada_nombre_alumno.get()
@@ -89,16 +107,16 @@ def interfaz_modificar_alumno():
     else:
         messagebox.showerror("Error", "No se pudo modificar el alumno")
 
+
 aplicacion = Tk()
 aplicacion.title("Modificaciones P. y A.")
 aplicacion.geometry("350x300")
-#centrado aproximado de la ventana
+# centrado aproximado de la ventana
 aplicacion.eval('tk::PlaceWindow . center')
 aplicacion.resizable(False, False)
 
 ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
-
 
 # Campos de entrada y botones para profesores
 Label(aplicacion, text="ID Profesor:").grid(row=0, column=0)
@@ -145,7 +163,7 @@ entrada_ciudad_alumno = Entry(aplicacion)
 entrada_ciudad_alumno.grid(row=10, column=1)
 
 Button(aplicacion, text="Modificar Alumno", command=interfaz_modificar_alumno).grid(row=11, column=0, columnspan=2)
-Label(aplicacion, text="*Todos los campos son requeridos").grid(row=12, column=0)
 
 aplicacion.iconphoto(True, icono)
 aplicacion.mainloop()
+
