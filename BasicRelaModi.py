@@ -12,6 +12,7 @@ def conectar():
         password = PASSWORD,
         database = DATABASE
     )
+#Modificar Alumno
 
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
     try:
@@ -31,7 +32,7 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
         cursor.execute(sql, valores)
         conn.commit()
 
-        print("Alumno con ID " + str(id_alumno) + " modificado correctamente.") #Concatenación anteriror a f-strings
+        print("Alumno con ID " + str(id_alumno) + " modificado correctamente.") #Concatenación anterior a f-strings
 
     except mysql.connector.Error as e:
         print(f"Error al modificar el alumno: {e}" + e)
@@ -74,6 +75,6 @@ def modificar_profesor(id_profesor, nuevo_nombre, nuevos_apellidos, nueva_edad, 
 
 # El Alumno con id_alumno34 va a modificar los datos que se pasan por parámentros al método, asegurarse que existe la id
 # Si no existen las id respectivas lo dará por cambiado.
-modificar_alumno(34, "Antonio", "García", 39, "Palmete")
+modificar_alumno(34, "Antonio", "García", 39, "Palma")
 
-modificar_profesor(5, "José Andrés", "Marín Huertas", 53, "Cadiz")
+modificar_profesor(5, "José Andrés", "Marín Huertas", 53, "Gibraltar")
