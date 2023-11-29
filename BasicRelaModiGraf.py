@@ -17,7 +17,6 @@ def conectar():
         database=DATABASE
     )
 
-
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
     if not all([id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad]):
         messagebox.showerror("Error", "Todos los campos son requeridos")
@@ -49,12 +48,10 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
             cursor.close()
             conn.close()
 
-
 def modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad):
     if not all([id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad]):
         messagebox.showerror("Error", "Todos los campos son requeridos")
         return False
-
     try:
         conn = conectar()
         cursor = conn.cursor()
@@ -81,7 +78,6 @@ def modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nu
             cursor.close()
             conn.close()
 
-
 def interfaz_modificar_profesor():
     id_profesor = entrada_id_profesor.get()
     nuevo_nombre = entrada_nombre_profesor.get()
@@ -94,7 +90,6 @@ def interfaz_modificar_profesor():
     else:
         messagebox.showerror("Error", "No se pudo modificar el profesor")
 
-
 def interfaz_modificar_alumno():
     id_alumno = entrada_id_alumno.get()
     nuevo_nombre = entrada_nombre_alumno.get()
@@ -106,7 +101,6 @@ def interfaz_modificar_alumno():
         messagebox.showinfo("Éxito", "Alumno modificado con éxito")
     else:
         messagebox.showerror("Error", "No se pudo modificar el alumno")
-
 
 aplicacion = Tk()
 aplicacion.title("Modificaciones P. y A.")
