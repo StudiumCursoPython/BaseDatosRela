@@ -159,7 +159,7 @@ entrada_id_profesor = tk.Entry(aplicacion)
 entrada_id_profesor.grid(row=9, column=1)
 
 tk.Button(aplicacion, text="Insertar Alumno", command=interfaz_insertar_alumno).grid(row=10, column=0, columnspan=2)
-Label(aplicacion, text="*Todos los campos son requeridos").grid(row=11, column=0)
+Label(aplicacion, text="*Todos los campos son obligatorios").grid(row=11, column=0)
 tk.Button(aplicacion, text = "Borrar campos", command=borrado_campos).grid(row=12, column=0, columnspan=2)
 
 
