@@ -66,7 +66,7 @@ def interfaz_insertar_profesor():
         else:
             messagebox.showerror("Error", "No se pudo insertar el profesor")
     except ValueError:
-        messagebox.showerror("Error", "La edad debe ser un número")
+        messagebox.showerror("Error", "Todos los campos son obligatorios. La edad debe ser un número")
     finally:
         borrado_campos()
 
@@ -86,7 +86,7 @@ def interfaz_insertar_alumno():
         else:
             messagebox.showerror("Error", "No se pudo insertar el alumno")
     except ValueError:
-        messagebox.showerror("Error", "La edad debe ser un número")
+        messagebox.showerror("Error", "Todos los campos son obligatorios. La edad y la Id deben ser un número")
     finally:
         borrado_campos()
 
