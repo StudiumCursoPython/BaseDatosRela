@@ -19,7 +19,7 @@ def conectar():
 
 def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
     if not all([id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad]):
-        messagebox.showerror("Error", "Todos los campos son requeridos")
+        messagebox.showerror("Error", "Todos los campos son obligatorios")
         return False
 
     try:
@@ -87,8 +87,10 @@ def interfaz_modificar_profesor():
 
     if modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad):
         messagebox.showinfo("Éxito", "Profesor modificado con éxito")
+        borrado_campos()
     else:
         messagebox.showerror("Error", "No se pudo modificar el profesor")
+        borrado_campos()
 
 def interfaz_modificar_alumno():
     id_alumno = entrada_id_alumno.get()
@@ -99,12 +101,27 @@ def interfaz_modificar_alumno():
 
     if modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nueva_ciudad):
         messagebox.showinfo("Éxito", "Alumno modificado con éxito")
+        borrado_campos()
     else:
         messagebox.showerror("Error", "No se pudo modificar el alumno")
+        borrado_campos()
+
+def borrado_campos():
+    entrada_nombre_profesor.delete(0, 'end')
+    entrada_apellidos_profesor.delete(0, 'end')
+    entrada_edad_profesor.delete(0, 'end')
+    entrada_ciudad_profesor.delete(0, 'end')
+    entrada_id_profesor.delete(0, 'end')
+    # De alumnos
+    entrada_nombre_alumno.delete(0, 'end')
+    entrada_apellidos_alumno.delete(0, 'end')
+    entrada_edad_alumno.delete(0, 'end')
+    entrada_ciudad_alumno.delete(0, 'end')
+    entrada_id_alumno.delete(0, 'end')
 
 aplicacion = Tk()
 aplicacion.title("Modificaciones P. y A.")
-aplicacion.geometry("350x300")
+aplicacion.geometry("250x320")
 # centrado aproximado de la ventana
 aplicacion.eval('tk::PlaceWindow . center')
 aplicacion.resizable(False, False)
@@ -157,6 +174,8 @@ entrada_ciudad_alumno = Entry(aplicacion)
 entrada_ciudad_alumno.grid(row=10, column=1)
 
 Button(aplicacion, text="Modificar Alumno", command=interfaz_modificar_alumno).grid(row=11, column=0, columnspan=2)
+Button(aplicacion, text = "Borrar campos", command=borrado_campos).grid(row=12, column=0, columnspan=2)
+Label(aplicacion, text ="*Todos los campos son obligatorios").grid(row=13, column=0, columnspan=2)
 
 aplicacion.iconphoto(True, icono)
 aplicacion.mainloop()
