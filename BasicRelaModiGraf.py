@@ -1,6 +1,6 @@
-from tkinter import messagebox, Tk, Label, Entry, Button, PhotoImage
-import os
-import sys
+from tkinter import messagebox, Tk, PhotoImage
+import  tkinter as tk
+import os,sys
 import mysql.connector
 
 HOST = "178.211.133.56"
@@ -130,52 +130,52 @@ ruta_recursos = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file_
 icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
 
 # Campos de entrada y botones para profesores
-Label(aplicacion, text="ID Profesor:").grid(row=0, column=0)
+tk.Label(aplicacion, text="ID Profesor:").grid(row=0, column=0)
 entrada_id_profesor = Entry(aplicacion)
 entrada_id_profesor.grid(row=0, column=1)
 
-Label(aplicacion, text="Nombre Profesor:").grid(row=1, column=0)
+tk.Label(aplicacion, text="Nombre Profesor:").grid(row=1, column=0)
 entrada_nombre_profesor = Entry(aplicacion)
 entrada_nombre_profesor.grid(row=1, column=1)
 
-Label(aplicacion, text="Apellidos Profesor:").grid(row=2, column=0)
+tk.Label(aplicacion, text="Apellidos Profesor:").grid(row=2, column=0)
 entrada_apellidos_profesor = Entry(aplicacion)
 entrada_apellidos_profesor.grid(row=2, column=1)
 
-Label(aplicacion, text="Edad Profesor:").grid(row=3, column=0)
+tk.Label(aplicacion, text="Edad Profesor:").grid(row=3, column=0)
 entrada_edad_profesor = Entry(aplicacion)
 entrada_edad_profesor.grid(row=3, column=1)
 
-Label(aplicacion, text="Ciudad Profesor:").grid(row=4, column=0)
+tk.Label(aplicacion, text="Ciudad Profesor:").grid(row=4, column=0)
 entrada_ciudad_profesor = Entry(aplicacion)
 entrada_ciudad_profesor.grid(row=4, column=1)
 
-Button(aplicacion, text="Modificar Profesor", command=interfaz_modificar_profesor).grid(row=5, column=0, columnspan=2)
+tk.Button(aplicacion, text="Modificar Profesor", command=interfaz_modificar_profesor).grid(row=5, column=0, columnspan=2)
 
 # Campos de entrada y botones para alumnos
-Label(aplicacion, text="ID Alumno:").grid(row=6, column=0)
-entrada_id_alumno = Entry(aplicacion)
+tk.Label(aplicacion, text="ID Alumno:").grid(row=6, column=0)
+entrada_id_alumno = tk.Entry(aplicacion)
 entrada_id_alumno.grid(row=6, column=1)
 
-Label(aplicacion, text="Nombre Alumno:").grid(row=7, column=0)
-entrada_nombre_alumno = Entry(aplicacion)
+tk.Label(aplicacion, text="Nombre Alumno:").grid(row=7, column=0)
+entrada_nombre_alumno = tk.Entry(aplicacion)
 entrada_nombre_alumno.grid(row=7, column=1)
 
-Label(aplicacion, text="Apellidos Alumno:").grid(row=8, column=0)
-entrada_apellidos_alumno = Entry(aplicacion)
+tk.Label(aplicacion, text="Apellidos Alumno:").grid(row=8, column=0)
+entrada_apellidos_alumno = tk.Entry(aplicacion)
 entrada_apellidos_alumno.grid(row=8, column=1)
 
-Label(aplicacion, text="Edad Alumno:").grid(row=9, column=0)
-entrada_edad_alumno = Entry(aplicacion)
+tk.Label(aplicacion, text="Edad Alumno:").grid(row=9, column=0)
+entrada_edad_alumno = tk.Entry(aplicacion)
 entrada_edad_alumno.grid(row=9, column=1)
 
-Label(aplicacion, text="Ciudad Alumno:").grid(row=10, column=0)
-entrada_ciudad_alumno = Entry(aplicacion)
+tk.Label(aplicacion, text="Ciudad Alumno:").grid(row=10, column=0)
+entrada_ciudad_alumno = tk.Entry(aplicacion)
 entrada_ciudad_alumno.grid(row=10, column=1)
 
-Button(aplicacion, text="Modificar Alumno", command=interfaz_modificar_alumno).grid(row=11, column=0, columnspan=2)
-Button(aplicacion, text = "Borrar campos", command=borrado_campos).grid(row=12, column=0, columnspan=2)
-Label(aplicacion, text ="*Todos los campos son obligatorios").grid(row=13, column=0, columnspan=2)
+tk.Button(aplicacion, text="Modificar Alumno", command=interfaz_modificar_alumno).grid(row=11, column=0, columnspan=2)
+tk.Button(aplicacion, text = "Borrar campos", command=borrado_campos).grid(row=12, column=0, columnspan=2)
+tk.Label(aplicacion, text ="*Todos los campos son obligatorios").grid(row=13, column=0, columnspan=2)
 
 aplicacion.iconphoto(True, icono)
 aplicacion.mainloop()
