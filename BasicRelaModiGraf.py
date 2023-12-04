@@ -50,7 +50,7 @@ def modificar_alumno(id_alumno, nuevo_nombre, nuevos_apellidos, nueva_edad, nuev
 
 def modificar_profesor(id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad):
     if not all([id_profesor, nuevo_nombre, nuevo_apellido, nueva_edad, nueva_ciudad]):
-        messagebox.showerror("Error", "Todos los campos son requeridos")
+        messagebox.showerror("Error", "Todos los campos son obligatorios")
         return False
     try:
         conn = conectar()
@@ -131,23 +131,23 @@ icono = PhotoImage(file=os.path.join(ruta_recursos, "Studium.png"))
 
 # Campos de entrada y botones para profesores
 tk.Label(aplicacion, text="ID Profesor:").grid(row=0, column=0)
-entrada_id_profesor = Entry(aplicacion)
+entrada_id_profesor = tk.Entry(aplicacion)
 entrada_id_profesor.grid(row=0, column=1)
 
 tk.Label(aplicacion, text="Nombre Profesor:").grid(row=1, column=0)
-entrada_nombre_profesor = Entry(aplicacion)
+entrada_nombre_profesor = tk.Entry(aplicacion)
 entrada_nombre_profesor.grid(row=1, column=1)
 
 tk.Label(aplicacion, text="Apellidos Profesor:").grid(row=2, column=0)
-entrada_apellidos_profesor = Entry(aplicacion)
+entrada_apellidos_profesor = tk.Entry(aplicacion)
 entrada_apellidos_profesor.grid(row=2, column=1)
 
 tk.Label(aplicacion, text="Edad Profesor:").grid(row=3, column=0)
-entrada_edad_profesor = Entry(aplicacion)
+entrada_edad_profesor = tk.Entry(aplicacion)
 entrada_edad_profesor.grid(row=3, column=1)
 
 tk.Label(aplicacion, text="Ciudad Profesor:").grid(row=4, column=0)
-entrada_ciudad_profesor = Entry(aplicacion)
+entrada_ciudad_profesor = tk.Entry(aplicacion)
 entrada_ciudad_profesor.grid(row=4, column=1)
 
 tk.Button(aplicacion, text="Modificar Profesor", command=interfaz_modificar_profesor).grid(row=5, column=0, columnspan=2)
