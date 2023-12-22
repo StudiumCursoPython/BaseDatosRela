@@ -5,8 +5,8 @@ Autor: José Antonio Calvo López
 Fecha: Noviembre de 2023
 """
 
-import mysql.connector
 from mysql.connector import Error
+import mysql.connector
 
 HOST = "178.211.133.56"
 USER = "ofluqcym_cursoFor"

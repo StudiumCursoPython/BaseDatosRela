@@ -1,3 +1,12 @@
+""" 
+Curso Python empresa de 'Lenguaje de Programación Python'
+
+Autor: José Antonio Calvo López
+
+Fecha: Noviembre 2023
+
+"""
+
 from tkinter import messagebox, Tk, PhotoImage
 import  tkinter as tk
 import os,sys
